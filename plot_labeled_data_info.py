@@ -25,4 +25,4 @@ image_path = '/home/ubuntu/work/labeled_data/0419_084547/0419-upcam_01_vi_0001_2
 img = mpimg.imread(image_path)
 
 # Output Images
-print(size(img))
+print(np.size(img))
