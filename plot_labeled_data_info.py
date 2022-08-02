@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # input raw video directory
 #DataDir = '/Volumes/COMPA/upward_facing_cameras_data/raw_data'
 
-# image_path = '/home/ubuntu/work/labeled_data/0419_084547/0419-upcam_01_vi_0001_20190419_084547_trimmed-34614.jpg'
+image_path = '/home/ubuntu/work/labeled_data/0419_084547/0419-upcam_01_vi_0001_20190419_084547_trimmed-34614.jpg'
 #
 # img = cv2.imread(image_path)
 # # Output img with window name as 'image'
@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 # image using matplotlib
 
 # Read Images
-img = mpimg.imread('g4g.png')
+img = mpimg.imread(image_path)
 
 # Output Images
 plt.imshow(img)
