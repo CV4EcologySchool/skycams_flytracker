@@ -11,9 +11,14 @@ import re
 ###############################################################################
 # input raw video directory
 dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations'
+
 training_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training_frames'
 validation_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation_frames'
 test_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test_frames'
+
+training_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training_frames'
+validation_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation_frames'
+test_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test_frames'
 
 #find json files
 label_file_ext = '*.json'
@@ -28,6 +33,7 @@ for path, subdirs, files in os.walk(dataDir):
 
 # read in json file and get a list of a subset of frames as a training set
 # getting the first 70% of frames from each video as training set
+# the next 30% is split in 2 for validation and test frames
 
 all_training_frames_nums = []
 all_validation_frames_nums = []
@@ -63,6 +69,7 @@ labels_file.close()
 #(all_training_frames_nums)
 
 #################################################################################
+#find the frame codes that correspond to training, validation, test frames
 
 all_training_frame_codes = []
 for i in range(len(all_training_frames_nums)):
@@ -92,7 +99,8 @@ for i in range(len(all_test_frames_nums)):
     all_test_frame_codes.append(test_frame_codes)
 
 ###############################################################################
-#create the paths
+#create the paths to frames so I can copy and move them
+
 training_frames_image_paths = []
 for i in range(len(all_training_frame_codes)):
     for j in range(len(all_training_frame_codes[i])):
@@ -122,19 +130,54 @@ print(len(validation_frames_image_paths))
 print(len(test_frames_image_paths))
 
 ###############################################################################
-#find test frames and copy them and move them
-for f in training_frames_image_paths:
+#get the paths for the .txt files
+training_frames_label_paths = []
+for i in range(len(training_frames_image_paths)):
+    txt_path_training = training_frames_image_paths[i][:-4]+'.txt'
+    training_frames_label_paths.append(txt_path_training)
+
+validation_frames_label_paths = []
+for i in range(len(validation_frames_image_paths)):
+    txt_path_validation = validation_frames_image_paths[i][:-4]+'.txt'
+    validation_frames_label_paths.append(txt_path_validation)
+
+test_frames_label_paths = []
+for i in range(len(test_frames_image_paths)):
+    txt_path_test = test_frames_image_paths[i][:-4]+'.txt'
+    test_frames_label_paths.append(txt_path_test)
+
+# ###############################################################################
+# #find test frames and copy them and move them
+# for f in training_frames_image_paths:
+#     head, tail = os.path.split(f)
+#     shutil.copy(f, training_dataDir+'/'+tail)
+# # ###############################################################################
+#
+# #find non-test frames and copy them and move them
+# for ff in validation_frames_image_paths:
+#     head, tail = os.path.split(ff)
+#     shutil.copy(f, validation_dataDir+'/'+tail)
+# # ###############################################################################
+#
+# #find non-test frames and copy them and move them
+# for ff in test_frames_image_paths:
+#     head, tail = os.path.split(ff)
+#     shutil.copy(f, test_dataDir+'/'+tail)
+
+###############################################################################
+#find test labels and copy them and move them
+for f in training_frames_label_paths:
     head, tail = os.path.split(f)
-    shutil.copy(f, training_dataDir+'/'+tail)
+    shutil.copy(f, training_labelDir+'/'+tail)
 # ###############################################################################
 
-#find non-test frames and copy them and move them
-for ff in validation_frames_image_paths:
+#find non-test labels and copy them and move them
+for ff in validation_frames_label_paths:
     head, tail = os.path.split(ff)
-    shutil.copy(f, validation_dataDir+'/'+tail)
+    shutil.copy(f, validation_labelDir+'/'+tail)
 # ###############################################################################
 
-#find non-test frames and copy them and move them
-for ff in test_frames_image_paths:
+#find non-test labels and copy them and move them
+for ff in test_frames_label_paths:
     head, tail = os.path.split(ff)
-    shutil.copy(f, test_dataDir+'/'+tail)
+    shutil.copy(f, test_labelDir+'/'+tail)
