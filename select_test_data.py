@@ -12,13 +12,13 @@ import re
 # input raw video directory
 dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations'
 
-training_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training_frames'
-validation_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation_frames'
-test_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test_frames'
+training_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training/images'
+validation_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation/images'
+test_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test/images'
 
-training_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training_frames'
-validation_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation_frames'
-test_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test_frames'
+training_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training/labels'
+validation_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation/labels'
+test_labelDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test/labels'
 
 #find json files
 label_file_ext = '*.json'
@@ -146,6 +146,7 @@ for i in range(len(test_frames_image_paths)):
     txt_path_test = test_frames_image_paths[i][:-4]+'.txt'
     test_frames_label_paths.append(txt_path_test)
 
+
 # ###############################################################################
 # #find test frames and copy them and move them
 # for f in training_frames_image_paths:
@@ -156,28 +157,28 @@ for i in range(len(test_frames_image_paths)):
 # #find non-test frames and copy them and move them
 # for ff in validation_frames_image_paths:
 #     head, tail = os.path.split(ff)
-#     shutil.copy(f, validation_dataDir+'/'+tail)
+#     shutil.copy(ff, validation_dataDir+'/'+tail)
 # # ###############################################################################
 #
 # #find non-test frames and copy them and move them
-# for ff in test_frames_image_paths:
-#     head, tail = os.path.split(ff)
-#     shutil.copy(f, test_dataDir+'/'+tail)
+# for fff in test_frames_image_paths:
+#     head, tail = os.path.split(fff)
+#     shutil.copy(fff, test_dataDir+'/'+tail)
 
 ###############################################################################
 #find test labels and copy them and move them
-for f in training_frames_label_paths:
-    head, tail = os.path.split(f)
-    shutil.copy(f, training_labelDir+'/'+tail)
+for lf in training_frames_label_paths:
+    head, tail = os.path.split(lf)
+    shutil.copy(lf, training_labelDir+'/'+tail)
 # ###############################################################################
 
 #find non-test labels and copy them and move them
-for ff in validation_frames_label_paths:
-    head, tail = os.path.split(ff)
-    shutil.copy(f, validation_labelDir+'/'+tail)
+for lff in validation_frames_label_paths:
+    head, tail = os.path.split(lff)
+    shutil.copy(lff, validation_labelDir+'/'+tail)
 # ###############################################################################
 
 #find non-test labels and copy them and move them
-for ff in test_frames_label_paths:
-    head, tail = os.path.split(ff)
-    shutil.copy(f, test_labelDir+'/'+tail)
+for lfff in test_frames_label_paths:
+    head, tail = os.path.split(lfff)
+    shutil.copy(lfff, test_labelDir+'/'+tail)

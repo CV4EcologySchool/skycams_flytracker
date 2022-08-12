@@ -1,0 +1,4 @@
+# hyperparameters for testing yolo for fly detection with skycams detection
+
+mosaic: 0.0  # image mosaic (probability)
+mixup: 0.0  # image mixup (probability)

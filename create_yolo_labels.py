@@ -11,9 +11,9 @@ import re
 ###############################################################################
 # input data directory
 dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations'
-training_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training_frames'
-validation_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation_frames'
-test_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test_frames'
+# training_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/training_frames'
+# validation_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/validation_frames'
+# test_dataDir = '/Users/fponce/Documents/cv4e/Skycam_annotations/test_frames'
 
 #find json files
 label_file_ext = '*.json'
@@ -31,7 +31,7 @@ for i in range(len(all_label_paths)):
     directory_path = head
     print(directory_path)
     for j in labels.keys():
-
+        labelclass = 0
         label_coordinates = labels[j][0]
         x1 = int(label_coordinates[0])
         y1 = int(label_coordinates[1])
@@ -45,7 +45,7 @@ for i in range(len(all_label_paths)):
 
         with open(f_name, 'w') as f:
             try:
-                data = [cx, cy, width, height]
-                f.write('{}\t{}\t{}\t{}'.format(data[0], data[1], data[2], data[3]))
+                data = [labelclass, cx/500, cy/500, width/500, height/500]
+                f.write('{}\t{}\t{}\t{}\t{}'.format(data[0], data[1], data[2], data[3], data[4]))
             except FileNotFoundError:
                 print("The 'docs' directory does not exist")
